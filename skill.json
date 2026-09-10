@@ -1,0 +1,17 @@
+{
+  "name": "genpark-hindley-milner-type-inference-skill",
+  "version": "1.0.0",
+  "description": "Hindley-Milner (Algorithm W) polymorphic type inference engine solving principal types via Robinson first-order unification.",
+  "main": "client.py",
+  "mcp_server": "mcp_server.py",
+  "topics": [
+    "genpark-skill",
+    "agentic-ai",
+    "hindley-milner",
+    "type-inference",
+    "algorithm-w",
+    "type-systems",
+    "unification"
+  ],
+  "dependencies": []
+}
