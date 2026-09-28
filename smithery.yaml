@@ -1,0 +1,6 @@
+name: genpark-hindley-milner-type-inference-skill
+version: 1.0.0
+description: Hindley-Milner Algorithm W polymorphic type inference engine with unification and constraint solving
+command: python
+args:
+  - mcp_server.py
