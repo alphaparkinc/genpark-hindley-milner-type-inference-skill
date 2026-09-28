@@ -1,34 +1,18 @@
-# genpark-hindley-milner-type-inference-skill
+# Hindley-Milner Type Inference Skill
 
-[![CI](https://github.com/alphaparkinc/genpark-hindley-milner-type-inference-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/alphaparkinc/genpark-hindley-milner-type-inference-skill/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-
-> Hindley-Milner (Algorithm W) polymorphic type inference engine solving principal types via Robinson first-order unification.
-
-## Architecture
-
-```mermaid
-flowchart TD
-    Client[AI Agent / Language Frontend] -->|Source Tokens / IR| Engine[genpark-hindley-milner-type-inference-skill]
-    Engine --> CompilerPass[AST / Type Inference / SSA / VM Engine]
-    CompilerPass --> TargetOutput[(Executable Bytecode / Machine Plan)]
-```
+High-efficiency, zero-dependency Python implementation of **Hindley-Milner Type Inference (Algorithm W)** and Robinson syntactic unification.
 
 ## Features
-- Pure standard library Python implementation with strictly zero pip dependencies.
-- Production-grade compiler engineering principles (Pratt parsing, Algorithm W, ADCE, K-coloring).
-- Native Model Context Protocol (MCP) server support for AI agent orchestration.
+- **Syntactic Unification**: Recursively resolves structural type equivalence and substitution constraints.
+- **Principal Type Guarantees**: Infers the most general polymorphic type without requiring explicit annotations.
+- **Zero External Dependencies**: Pure Python standard library.
+- **Native MCP Protocol**: JSON-RPC 2.0 stdio server compatible with Claude Desktop, Cursor, and Windsurf.
 
-## Installation
-
-```bash
-git clone https://github.com/alphaparkinc/genpark-hindley-milner-type-inference-skill.git
-cd genpark-hindley-milner-type-inference-skill
-```
-
-## Quickstart
-
-```bash
-python example_usage.py
+## Architecture
+```mermaid
+graph TD
+    Expr["Typed AST Expression"] --> W["Algorithm W"]
+    W --> Unify["First-Order Unification Solver"]
+    Unify --> Subst["Most General Unifier Substitution (MGU)"]
+    Subst --> PrincipalType["Principal Type Output (e.g., a -> b -> a)"]
 ```
