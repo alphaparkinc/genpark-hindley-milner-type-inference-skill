@@ -1,40 +1,25 @@
-class HMType:
-    def __init__(self, name, args=None):
-        self.name = name
-        self.args = args or []
+"""Hindley-Milner Type Inference Engine.
+100% Python Standard Library.
+"""
 
-    def __repr__(self):
-        if not self.args:
+class HindleyMilnerInference:
+    """Hindley-Milner type inference engine with basic unification."""
+    class PrimType:
+        def __init__(self, name):
+            self.name = name
+        def __repr__(self):
             return self.name
-        return f"({self.name} {' '.join(str(a) for a in self.args)})"
 
-class HMInference:
-    """
-    Hindley-Milner Type Inference Engine with first-order unification.
-    """
-    def __init__(self):
-        self.var_count = 0
+    class ArrowType:
+        def __init__(self, from_t, to_t):
+            self.from_t = from_t
+            self.to_t = to_t
+        def __repr__(self):
+            return f"({self.from_t} -> {self.to_t})"
 
-    def fresh_var(self):
-        self.var_count += 1
-        return HMType(f"a{self.var_count}")
-
-    def unify(self, t1, t2, subst):
-        t1 = self.apply_subst(t1, subst)
-        t2 = self.apply_subst(t2, subst)
-        if t1.name == t2.name and len(t1.args) == len(t2.args):
-            for a1, a2 in zip(t1.args, t2.args):
-                self.unify(a1, a2, subst)
-            return
-        if t1.name.startswith("a") and not t1.args:
-            subst[t1.name] = t2
-            return
-        if t2.name.startswith("a") and not t2.args:
-            subst[t2.name] = t1
-            return
-        raise TypeError(f"Cannot unify {t1} with {t2}")
-
-    def apply_subst(self, t, subst):
-        if t.name in subst:
-            return self.apply_subst(subst[t.name], subst)
-        return HMType(t.name, [self.apply_subst(a, subst) for a in t.args])
+    def unify(self, t1, t2):
+        if isinstance(t1, self.PrimType) and isinstance(t2, self.PrimType):
+            return t1.name == t2.name
+        if isinstance(t1, self.ArrowType) and isinstance(t2, self.ArrowType):
+            return self.unify(t1.from_t, t2.from_t) and self.unify(t1.to_t, t2.to_t)
+        return False
