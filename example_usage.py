@@ -1,17 +1,12 @@
-from client import HMInference, HMType
+from client import HindleyMilnerInference
 
-def main():
-    print("=== Testing Hindley-Milner Type Inference ===")
-    hm = HMInference()
-    t1 = HMType("Int")
-    v = hm.fresh_var()
-    subst = {}
-    hm.unify(v, t1, subst)
-    res = hm.apply_subst(v, subst)
-    print("Inferred type:", res)
+hm = HindleyMilnerInference()
+int_t = hm.PrimType("Int")
+bool_t = hm.PrimType("Bool")
 
-    assert res.name == "Int"
-    print("=== All tests passed successfully! ===")
+f1 = hm.ArrowType(int_t, bool_t)
+f2 = hm.ArrowType(int_t, bool_t)
+f3 = hm.ArrowType(int_t, int_t)
 
-if __name__ == "__main__":
-    main()
+print(f"Unify {f1} with {f2}:", hm.unify(f1, f2))
+print(f"Unify {f1} with {f3}:", hm.unify(f1, f3))
