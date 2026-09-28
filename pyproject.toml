@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genpark-hindley-milner-type-inference-skill"
+version = "1.0.0"
+description = "Hindley-Milner Algorithm W polymorphic type inference engine with unification and constraint solving"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
